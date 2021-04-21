@@ -3,7 +3,55 @@ import styled from 'styled-components';
 import { GithubContext } from '../context/context';
 import { ExampleChart, Pie3D, Column3D, Bar3D, Doughnut2D } from './Charts';
 const Repos = () => {
-  return <h2>repos component</h2>;
+  const { repos } = React.useContext(GithubContext);
+
+  let languages = repos.reduce((total, item) => {
+    const { language } = item;
+    if (!language) return total;
+    if (!total[language]) {
+      total[language] = {
+        label:language, 
+        value:1
+        };
+      } else {
+    total[language] = {
+      ...total[language], 
+      value:total[language].value + 1
+      };
+    }
+    return total;
+  }, {});
+
+  languages = Object.values(languages).sort((a, b) => {
+    return b.value - a.value;
+  }).slice(0, 9);
+
+  const chartData = [
+    {
+      label: "HTML",
+      value: "13"
+    },
+    {
+      label: "CSS",
+      value: "230"
+    },
+    {
+      label: "Javascript",
+      value: "80"
+    },
+  ];
+  return (
+  <section className='section'>
+    <Wrapper className='section-center'>
+      <Pie3D data={languages} />
+      <Column3D data={chartData} />
+      <Bar3D data={chartData} />
+      <Doughnut2D data={chartData} />
+      {/* <ExampleChart data={chartData} /> */}
+    </Wrapper>
+  </section>
+  
+  );
 };
 
 const Wrapper = styled.div`

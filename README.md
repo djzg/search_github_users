@@ -44,7 +44,7 @@ version used - "react-router-dom": "^5.2.0",
 - <Switch> renders the first child <Route> that matches
 - A <Route path="*"> always matches
 
-## Gihthub API
+## Github API
 
 - [Root Endpoint](https://api.github.com)
 - [Get User](https://api.github.com/users/wesbos)
