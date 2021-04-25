@@ -44,7 +44,7 @@ const GithubProvider = ({children}) => {
           setFollowers(followers.value.data);
         }
 
-      })
+      }).catch(err => console.log(err));
 
     } else {
       toggleError(true, 'User not found.');
